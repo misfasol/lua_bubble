@@ -35,12 +35,14 @@ function Model:new()
   novo.rodando = true
   novo.KEY_UP = 72
   novo.KEY_DOWN = 80
+  novo.KEY_SPACE = 32
   return setmetatable(novo, self)
 end
 
 function Model:rodar()
   local s = self:view()
   local tam = #s
+  io.write("\x1b[?25l")
   io.write(s)
   if s:sub(tam, tam) ~= "\n" then print() end
   local _, h = tamanhos(s)
@@ -50,6 +52,7 @@ function Model:rodar()
   	io.write(self:view())
     if s:sub(tam, tam) ~= "\n" then print() end
   end
+  io.write("\x1b[?25h")
 end
 
 M.getch = lib_c.getch
